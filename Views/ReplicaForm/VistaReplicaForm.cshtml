@@ -1,0 +1,257 @@
+@model ReplicaForm.Models.Persona; 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<!--
+     <link rel="stylesheet" media="all" href="/assets/application-4f3b4f08cd1f03905031efc552ebd06c532a62089d81d1cbff175de50df958a3.css" data-turbolinks-track="reload" />
+    <script src="/assets/application-467e0b1fae66618f98c39666f913d6e0b0827e15ee6f480150fb92acfe0a8ff4.js" data-turbolinks-track="reload"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-05ae272716c4133e0ba741678db1eeaf0867542d5a185910b558596b1752792a.ico" />
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script type="text/javascript">
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
+-->
+
+  <script type="text/javascript">
+        $(function() {
+            $('#datepicker').datepicker();
+        });
+    </script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
+</head>
+
+<div class="collapse" id="navbarToggleExternalContent">
+  <div class="bg-dark p-4">
+    <h5 class="text-white h4">FORMY</h5>
+    <span class="text-muted">Replication of an original form</span>
+  </div>
+</div>
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+
+<body>
+    <h1 style="font-size: 50px; font-weight: bold; text-align-last:left;">Complete web form</h1>
+<form asp-controller="ReplicaForm" asp-action="create">
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="mb-3 row">
+    <label asp-for="nombre" class="control-label"  style="font-size: 30px; font-weight: bold"> </label> 
+    <div class="col-sm-10">
+      <input asp-for="nombre" class="form-control" > </input>
+    </div>
+  </div>
+</div>
+<br />
+
+<div class="col-sm-8 col-sm-offset-2">
+    <div class="mb-3 row">
+      <strong><label asp-for="apellido" class="control-label" style="font-size: 30px; font-weight: bold" > </label> </strong>
+      <div class="col-sm-10">
+        <input asp-for="apellido" class="form-control" > </input>
+      </div>
+    </div>
+ </div>
+<br />
+
+ <div class="col-sm-8 col-sm-offset-2">
+    <div class="mb-3 row">
+        <strong> <label asp-for="job" class="control-label" style="font-size: 30px; font-weight: bold" > </label> </strong>
+        <div class="col-sm-10">
+        <input asp-for="job" class="form-control" > </input>
+        </div>
+    </div>
+  </div>
+<br />
+      
+  <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-8 col-sm-offset-2">
+         <h2><strong><label for="radio-button" tyle="font-size: 30px; font-weight: bold">Highest level of education</label></strong></h2>
+        </div>
+ </div>  
+
+@for (int i = 0; i < Model.RadioList.Count; i++)
+{
+  <div> 
+        @* @Html.HiddenFor(model => Model.RadioList[i].Type) <!-- para guardar el valor DE EDUCATION--> *@
+
+        @Html.RadioButtonFor(model => Model.RadioSelected, Model.RadioList[i].Type)
+        
+        @Html.LabelFor(model =>  Model.RadioList[i].Type, Model.RadioList[i].Type )
+    </div> 
+}
+
+
+<!-- RADIO BUTTON METODO 1 DE LEVEL OF EDUCATION -->
+@*
+  @{ 
+          foreach (var radio in Model.RadioList)
+          {
+              <div>
+                  
+                  @Html.RadioButtonFor(model => radio.Type, new { id = "radio" + radio.ID })
+                  @Html.LabelFor(model => radio.Type, radio.Type) <!--label for se obtiene de un Model-->
+              </div>
+          }
+  }
+*@
+
+
+<!-- RADIO BUTTON METODO 2 DE LEVEL OF EDUCATION -->
+@*
+@for (int i = 0; i < Model.RadioList.Count; i++)
+{
+  <div> 
+        @Html.HiddenFor(model => Model.RadioList[i].Type) <!-- para guardar el valor DE EDUCATION-->
+
+        @Html.RadioButtonFor(model => Model.RadioList[i].active, new { id = "radio" + Model.RadioList[i].ID })
+        
+        @Html.LabelFor(model => Model.RadioList[i].active, Model.RadioList[i].Type)
+    </div> 
+}
+
+*@
+
+
+ <!-- RADIO BUTTONS METODO 3 DE LEVEL OF EDUCATION---NO MUY RECOMENDADO -->
+  <!-- 
+    <div class="input-group">
+        <div class="col-sm-8 col-sm-offset-2">
+          <input type="radio" id="radio-button-1" aria-label="Radio button" value="radio-button-1" >
+          High School
+        </div>
+        
+        <div class="col-sm-8 col-sm-offset-2">
+          <input type="radio" id="radio-button-2" aria-label="Radio button" value="radio-button-2">
+          College
+        </div>
+
+        <div class="col-sm-8 col-sm-offset-2">
+          <input type="radio" id="radio-button-3" aria-label="Radio button" value="radio-button-3" >
+          Grad School
+        </div>
+    </div>
+    <br />
+-->
+ <br />
+
+  <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-8 col-sm-offset-2">
+         <h2><strong><label for="radio-button" tyle="font-size: 30px; font-weight: bold">Sex</label></strong></h2>
+        </div>
+ </div>  
+
+<!-- SEXO RadioButton FUNCIONA -->
+@*
+<div class="col-sm-8 col-sm-offset-2">
+@{ 
+        foreach (var sex in Model.SexList)
+        {
+            <div class="col-sm-8 col-sm-offset-2" tyle="font-size: 30px; font-weight: bold">
+                @Html.RadioButtonFor(model => model.Gender, new { id = "sex" + sex.ID })
+                @Html.Label("sex" + sex.ID, sex.Type)
+            </div >
+        }
+ }
+ </div> 
+ <br />
+*@
+
+<!-- SEXO CHECKBOX -->
+
+
+<!-- para guardar el valor -->
+@for (int i = 0; i < Model.SexList.Count; i++)
+{
+  <div> 
+        @Html.HiddenFor(model => Model.SexList[i].Type) <!-- para guardar el valor DE GENERO-->
+
+        @Html.CheckBoxFor(model => Model.SexList[i].active, new { id = "sex" + Model.SexList[i].ID })
+        
+        @Html.LabelFor(model => Model.SexList[i].active, Model.SexList[i].Type)
+    </div> 
+}
+
+<!-- AÑOS DE EXPERIENCIA-->
+<div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-8 col-sm-offset-2">
+         <h2><strong><label for="radio-button" tyle="font-size: 30px; font-weight: bold">Years of experience</label></strong></h2>
+        </div>
+ </div>  
+
+<div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-8 col-sm-offset-2">
+       <select asp-for="yearExperience" name="yearExperience" class="form-control">
+            <option value="" disabled="" selected="">Select an option</option>
+            <option value="0-1">0-1</option>
+            <option value="2-4">2-4</option>
+            <option value="5-9">5-9</option>
+            <option value="10+">10+</option>
+        </select>
+    <span asp-validation-for="yearExperience" class="text-danger"></span>
+  </div>
+</div>
+
+
+    <!-- INSERT DATE-->
+ <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-8 col-sm-offset-2">
+         <h2><strong><label for="radio-button" tyle="font-size: 30px; font-weight: bold">Date</label></strong></h2>
+        </div>
+ </div>  
+
+<div class="col-sm-8 col-sm-offset-2">
+  
+        <div class="col-sm-8 col-sm-offset-2" >
+          <i class="fa fa-calendar" align="right"></i>
+        <input type="text"
+               class="form-control"
+               name ="date"
+               id="datepicker"
+               data-provide="datepicker"
+               placeholder="dd/mm/yyyy"
+               data-date-autoclose="true"
+               data-date-today-highlight="true" 
+               data-date-format="dd/mm/yyyy">
+        </div>
+</div>
+ 
+<br />
+
+    <button type="submit" class="btn btn-primary">Submit</button> 
+   <footer></footer> 
+</form>
+
+ <h2>@ViewData["Message1"]</h2>
+<h2>@ViewData["Message2"]</h2>
+
+</body>
+</html>
