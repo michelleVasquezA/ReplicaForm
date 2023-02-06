@@ -55,11 +55,11 @@ jobs:
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
-    env:
-      Solution_Name:  MyReplicaForm.sln                     # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Path: MyReplicaForm.Tests\MyReplicaForm.Tests.csproj.               # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
-      Wap_Project_Directory: MyReplicaForm.Package.   # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
-      Wap_Project_Path: MyReplicaForm.App.Package\MyReplicaForm.Package.wapproj.                  # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+    env: 
+      Solution_Name:  ReplicaForm.sln                     # Replace with your solution name, i.e. MyWpfApp.sln.
+      Test_Project_Path: ReplicaForm.Tests\ReplicaForm.Tests.csproj.               # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Wap_Project_Directory: ReplicaForm.Package.   # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
+      Wap_Project_Path: ReplicaForm.App.Package\ReplicaForm.Package.wapproj.                  # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
     - name: Checkout
